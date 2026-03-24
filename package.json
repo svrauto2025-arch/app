@@ -1,0 +1,56 @@
+{
+  "name": "ticket-management-electron",
+  "version": "1.0.0",
+  "description": "Desktop Ticket Management System with Electron, Node.js, React",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "concurrently \"npm run backend\" \"npm run frontend\" \"wait-on tcp:3001 tcp:5173 && electron .\"",
+    "backend": "node backend/server.js",
+    "frontend": "vite --config frontend/vite.config.js",
+    "build": "vite build --config frontend/vite.config.js",
+    "electron-build": "npm run build && electron-builder",
+    "lint": "echo 'No lint configured'"
+  },
+  "build": {
+    "appId": "com.local.ticketmanager",
+    "productName": "Ticket Management System",
+    "files": [
+      "electron/**/*",
+      "backend/**/*",
+      "frontend/dist/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "electron/assets"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.9.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.13",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.487.0",
+    "multer": "^1.4.5-lts.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.30.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^35.1.5",
+    "electron-builder": "^25.1.8",
+    "vite": "^6.2.4",
+    "wait-on": "^8.0.3"
+  }
+}
